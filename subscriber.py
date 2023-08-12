@@ -2,9 +2,10 @@ import asyncio
 import redis.asyncio as redis
 import logging
 import settings
+from json import dumps
 
 logging.basicConfig(
-    format="%(asctime)s %(levelname)s:%(message)s", level=logging.DEBUG
+    format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO
 )
 
 request_channel = 'subscription_requests'
@@ -23,17 +24,8 @@ async def reader():
                 if message is not None:
                     message = message['data'].decode()
                     print(f'message received: {message}')
-                    await publish(message)
+                    # await publish(message)
 
 
-async def publish(msg):
-    async with pub:
-        await pub.publish(request_channel, msg)
-
-
-async def main():
-    await reader()
-
-
-if __name__ == '__main__':
-    asyncio.run(publish('subscribe tcs 1 lalala'))
+async def publish(msg, r):
+    await r.publish(request_channel, msg)
