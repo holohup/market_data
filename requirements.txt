@@ -1,4 +1,4 @@
-python>=dotenv-1.0.0
+python-dotenv>=1.0.0
 redis>=4.6.0
 ib-insync>=0.9.86
 tinkoff-investments>=0.2.0b59
