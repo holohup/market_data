@@ -110,7 +110,7 @@ class IBWatcher(Watcher):
 
     async def _error_handler(self, reqId, errorCode, errorString, contract):
         if errorCode in (2103, 2108, 2110, 1100, 504, 502):
-            self._publish_orderbooks_errors()
+            await self._publish_orderbooks_errors()
 
     def _connect(self):
         self._ib.connect(*ib_creds)
